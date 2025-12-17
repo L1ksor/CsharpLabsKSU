@@ -1,53 +1,46 @@
-﻿namespace CsharpLab4
+﻿using Microsoft.VisualBasic;
+
+namespace CsharpLab4
 {
     internal class Program
     {
 
-        public delegate int ComparisonDelegate<T>(T x, T y);
-
         static void Main(string[] args)
         {
-            var ListInts = new int[] { 28,32,23,2,12,32,43,54 };
-            var ListString = new string[] { "gd", "bcd", "acd", "d" };
+            var ints = new int[] { 28,32,23,2,12,32,43,54 };
+            var strings = new string[] { "gd", "bcd", "acd", "d" };
 
-            SortCollection(ListInts, (int a,int b) => a.CompareTo(b));
-            SortCollection(ListString, (string a, string b) => a.CompareTo(b));
+            Sorter.SortCollection(ints, (int a,int b) => a.CompareTo(b));
+            Sorter.SortCollection(strings, (string a, string b) => a.CompareTo(b));
 
 
-            foreach (var x in ListString)
+            foreach (var x in strings)
                 Console.WriteLine(x);
-            foreach (var y in ListInts) 
+            foreach (var y in ints) 
                 Console.WriteLine(y);
+
+            var sorter = new SorterAdvanced();
+
+            // Подписываемся - передаем только string!
+            sorter.SortingCompleted += OnSortingCompleted;
+
+            // Лямбда еще проще:
+            sorter.SortingCompleted += message =>
+                Console.WriteLine($"Лямбда получила: {message}");
+
+            int[] numbers = { 5, 2, 8, 1, 9 };
+            Console.WriteLine($"Сортируем: {string.Join(", ", numbers)}");
+
+            sorter.SortCollection(numbers, (a, b) => a.CompareTo(b));
+
+            Console.WriteLine($"Результат: {string.Join(", ", numbers)}");
+
         }
 
-        
-
-        public static void SortCollection<T>(T[] array, ComparisonDelegate<T> compare)
+        // Обработчик получает ТОЛЬКО сообщение, а не object sender!
+        static void OnSortingCompleted(string message)
         {
-            if (array == null || array.Length == 1)
-            {
-                return;
-            }
-
-            int j;
-            for (int i = 1; i < array.Length; i++)
-            {
-                j = i;
-                while (j > 0 && compare(array[j-1], array[j]) > 0)
-                {
-                    Swap(array, j, j - 1);
-                    j--;
-                }
-
-            }
-        }
-
-        static void Swap<T>(T[] array, int i, int j)
-        {
-            T temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-
+            Console.WriteLine($"Событие: {message}");
         }
     }
 }
