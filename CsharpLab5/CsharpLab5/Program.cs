@@ -5,7 +5,7 @@ namespace CsharpLab5
     internal class Program
     {
 
-        static string filePath = " ";
+        static string filePath = "recipes.json";
 
         static void Main(string[] args)
         {
@@ -70,7 +70,7 @@ namespace CsharpLab5
             {
                 Ingredients = ingredients
             };
-
+            recipes.Add(newRecipe);
         }
 
         private static Dictionary<string, int> AddIngredients()
@@ -99,12 +99,47 @@ namespace CsharpLab5
 
         static public void ShowRecipes(List<Recipe> recipes)
         {
+            for (int i = 0; i < recipes.Count; i++)
+            {
+                Recipe recipe = recipes[i];
 
+                Console.WriteLine($"РЕЦЕПТ #{i + 1}");
+                Console.WriteLine($"Название: {recipe.Name}");
+                Console.WriteLine($"Описание: {recipe.Description}");
+                Console.WriteLine($"Станция: {recipe.CraftingStation}");
+                Console.WriteLine($"Требуемый уровень: {recipe.Level}");
+
+                Console.WriteLine("Ингредиенты:");
+                if (recipe.Ingredients != null && recipe.Ingredients.Count > 0)
+                {
+                    foreach (var ingredient in recipe.Ingredients)
+                    {
+                        Console.WriteLine($"  - {ingredient.Key}: {ingredient.Value} шт.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("  (нет ингредиентов)");
+                }
+
+                Console.WriteLine("-----------------------------------");
+            }
         }
 
         static public void SaveRecipes(List<Recipe> recipes)
         {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true, 
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase 
+            };
 
+            string json = JsonSerializer.Serialize(recipes, options);
+
+            File.WriteAllText(filePath, json);
+
+            Console.WriteLine($"\n✓ Успешно сохранено {recipes.Count} рецептов в файл: {filePath}");
+            Console.WriteLine($"Файл сохранен по пути: {Path.GetFullPath(filePath)}");
         }
     }
 }
