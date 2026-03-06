@@ -32,6 +32,31 @@ namespace CsharpControlWork1
             }
         }
 
+        public (string Name, TKey Key)[] GetTestKeys()
+        {
+            if (_listKeys.Count == 0)
+                throw new InvalidOperationException("Коллекция пуста");
+
+            return new (string, TKey)[]
+            {
+                ("Первый", _listKeys[0]),
+                ("Центральный", _listKeys[_listKeys.Count / 2]),
+                ("Последний", _listKeys[_listKeys.Count - 1]),
+                ("Несуществующий", _generateElement(_listKeys.Count + 1000).Key)
+            };
+        }
+
+        public (string Name, TValue Value)[] GetTestValues()
+        {
+            return new (string, TValue)[]
+            {
+                ("Первое", _listValues[0]),
+                ("Центральное", _listValues[_listValues.Count / 2]),
+                ("Последнее", _listValues[_listValues.Count - 1]),
+                ("Несуществующее", _generateElement(_listKeys.Count + 1000).Value)
+            };
+        }
+
         public bool ListKeysContains(TKey key) => _listKeys.Contains(key);
 
         public bool StringListContains(string key) => _listKeys.Select(k => k.ToString()).Contains(key);

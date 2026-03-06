@@ -1,4 +1,6 @@
-﻿namespace CsharpControlWork1
+﻿using System.Diagnostics;
+
+namespace CsharpControlWork1
 {
     internal class Program
     {
@@ -107,9 +109,38 @@
             }
 
 
-            var countTests = int.Parse( Console.ReadLine() );
+            Console.Write("Введите количество элементов: ");
+            var countTests = int.Parse(Console.ReadLine());
+
             var testCol = new TestCollections<Edition, Magazine>(countTests, GeneratePair);
-            Console.WriteLine(testCol);
+
+            var testKeys = testCol.GetTestKeys();
+            Console.WriteLine("\n\n ИЗМЕРЕНИЕ ВРЕМЕНИ ПОИСКА \n");
+
+            foreach (var keyInfo in testKeys)
+            {
+                Console.WriteLine($"\n поиск {keyInfo.Name} элемента");
+
+                Stopwatch sw = Stopwatch.StartNew();
+                bool found1 = testCol.ListKeysContains(keyInfo.Key);
+                sw.Stop();
+                Console.WriteLine($"List<TKey>.Contains: {sw.ElapsedTicks} : {found1}");
+
+                sw.Restart();
+                bool found2 = testCol.StringListContains(keyInfo.Key.ToString());
+                sw.Stop();
+                Console.WriteLine($"List<string>.Contains: {sw.ElapsedTicks} : {found2}");
+
+                sw.Restart();
+                bool found3 = testCol.DictTKeyContainsKey(keyInfo.Key);
+                sw.Stop();
+                Console.WriteLine($"Dictionary<TKey, TValue>.ContainsKey: {sw.ElapsedTicks} : {found3}");
+
+                sw.Restart();
+                bool found4 = testCol.DictStringContainsKey(keyInfo.Key.ToString());
+                sw.Stop();
+                Console.WriteLine($"Dictionary<string, TValue>.ContainsKey: {sw.ElapsedTicks}  {found4}");
+            }
         }
 
     }
