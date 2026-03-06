@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace CsharpControlWork1
 {
-
-
     class Magazine
     {
         private string _title;
@@ -43,8 +41,7 @@ namespace CsharpControlWork1
             get => _articlesJournal; set => _articlesJournal = value;
         }
 
-
-        private bool this[Frequency index]
+        public bool this[Frequency index]
         {
             get
             {
@@ -88,7 +85,7 @@ namespace CsharpControlWork1
             _editors = new List<Person>();
         }
 
-        private void AddArticles (params Article[] articles)
+        public void AddArticles (params Article[] articles)
         {
             _articlesJournal.AddRange(articles);
         }

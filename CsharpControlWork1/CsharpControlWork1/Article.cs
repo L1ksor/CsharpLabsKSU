@@ -30,7 +30,7 @@ namespace CsharpControlWork1
         {
             return $"Заголовок статьи - {Title}\n" +
                 $"Рейтинг - {Rating}\n" +
-                $"Автор - {Author} \n";
+                $"Автор - {Author.FirstName} {Author.LastName} \n";
         }
 
         public int CompareTo(Article? other)
