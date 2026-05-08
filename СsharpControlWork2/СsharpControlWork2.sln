@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "СsharpControlWork2", "СsharpControlWork2\СsharpControlWork2.csproj", "{DD9955E4-117F-44D5-92B9-63C7D9D35439}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD9955E4-117F-44D5-92B9-63C7D9D35439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9955E4-117F-44D5-92B9-63C7D9D35439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9955E4-117F-44D5-92B9-63C7D9D35439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9955E4-117F-44D5-92B9-63C7D9D35439}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DF755E4-2435-488C-A545-5C6D9462F5E3}
+	EndGlobalSection
+EndGlobal
